@@ -1,0 +1,159 @@
+package theaterrevenue;
+
+import java.awt.GridLayout;
+
+import java.awt.event.ActionEvent;
+
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+
+import javax.swing.JFrame;
+
+import javax.swing.JLabel;
+
+import javax.swing.JOptionPane;
+
+import javax.swing.JPanel;
+
+import javax.swing.JTextField;
+
+public class TheaterRevenue extends JFrame {
+
+final double percentage = .20;
+
+double adultprice;
+
+private JTextField pa;
+
+private JTextField na;
+
+private JTextField pc;
+
+private JTextField nc;
+
+private JButton button;
+
+private final int guiwidth = 400;
+
+private final int guiheight = 200;
+
+public TheaterRevenue() {
+
+setTitle("Theater Revenue"); //Sets the title of the window
+
+setSize(guiwidth, guiheight); //sets the size of the window
+
+setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //sets the action to exit out
+
+button = new JButton("Calculate"); //Creates a button for clicking
+
+button.addActionListener(new revenuecalc());  //adds action listener which listens for the button to be clicked
+
+JLabel l11 = new JLabel("Price per adult:");  //create and add text field for adult ticket prices
+
+pa = new JTextField(10);
+
+JLabel l12 = new JLabel("# of adults:"); //create and add text field for number of adult tickets sold
+
+na = new JTextField(10);
+
+JLabel l13 = new JLabel("Price per child:"); //create and add text field for child ticket prices
+
+pc = new JTextField(10);
+
+JLabel l14 = new JLabel("# of children:"); //create and add text field for number of child tickets sold
+
+nc = new JTextField(10);
+
+JPanel p1 = new JPanel();  //Add Text Fields and Message Labels To Panels
+
+JPanel p2 = new JPanel();
+
+JPanel p3 = new JPanel();
+
+JPanel p4 = new JPanel();
+
+JPanel p5 = new JPanel();
+
+JPanel p6 = new JPanel();
+
+JPanel p7 = new JPanel();
+
+JPanel p8 = new JPanel();
+
+JPanel p9 = new JPanel();
+
+p1.add(l11); p2.add(pa);
+
+p3.add(l12); p4.add(na);
+
+p5.add(l13); p6.add(pc);
+
+p7.add(l14); p8.add(nc);
+
+p9.add(button); add(p1);
+
+add(p2); add(p3);
+
+add(p4); add(p5);
+
+add(p6); add(p7);
+
+add(p8); add(p9);
+
+setVisible(true); } //Makes window visible
+
+private class revenuecalc implements ActionListener
+
+{
+
+public void actionPerformed(ActionEvent e) {
+
+String priceadult;
+
+String adults; 
+
+String pricechild; 
+
+String children; 
+
+priceadult = pa.getText(); //record adult ticket price input
+
+adultprice=Double.parseDouble(priceadult); //convert string to double
+
+adults = na.getText(); //record number of adult tickets input
+
+double grossadult = (adultprice)* Double.parseDouble(adults); //calculate gross profit from adults
+
+double netadult = (grossadult) * percentage; //calculate net profit from adults
+
+pricechild = pc.getText(); //record children ticket price input
+
+children = nc.getText(); //record number of children tickets input
+
+double grosschild = Double.parseDouble (pricechild)* Double.parseDouble(children); //calculate gross profit from children
+
+double netchild= grosschild * percentage; //calculate net profit from children
+
+double gross = grosschild + grossadult; //calculate total gross profit
+
+double net = netadult + netchild; //calculate total net profit
+
+JOptionPane.showMessageDialog(null, "Adult gross profit: " +
+
+grossadult + "\n" + "Adult net profit: " + netadult + "\n" + "Child gross profit: " +
+
+grosschild + "\n" + "Child net profit: " + netchild + "\n" + "Total gross profit: " +
+
+gross + "\n" + "Total net profit: " + net);
+
+}
+
+}
+public static void main (String args[])
+{
+TheaterRevenue TR = new TheaterRevenue();
+
+}
+}
