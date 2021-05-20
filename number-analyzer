@@ -1,0 +1,102 @@
+package numberanalyzer;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+import java.awt.event.ActionEvent;
+
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+
+import javax.swing.JFrame;
+
+import javax.swing.JLabel;
+
+import javax.swing.JOptionPane;
+
+import javax.swing.JPanel;
+
+import javax.swing.JTextField;
+
+public class NumberAnalyzer extends JFrame{
+
+    
+private final JTextField in;
+
+
+private final JButton submit;
+
+
+public NumberAnalyzer() {
+
+setLayout(new FlowLayout());
+
+submit = new JButton("Submit"); //Creates a button for clicking
+
+submit.addActionListener(new analyzer());
+
+
+JLabel na = new JLabel("Enter integers:");  //create and add text field for integers
+
+in = new JTextField(10);
+
+
+add(na); add(in); add(submit); 
+
+}
+public class analyzer implements ActionListener{
+        
+    /**
+     *
+     * @param ae
+     */
+    @Override
+public void actionPerformed(ActionEvent ae){
+    String nums = in.getText(); //get input
+    String[] numsarray = nums.split(" "); //convert string input to array of strings
+    String high;
+    String low;
+    int h = 0;
+    int l = 0;
+    int[] numbers = new int[numsarray.length]; //initialize int array of string array length
+    for(int i = 0;i < numsarray.length;i++)
+    {
+    numbers[i] = Integer.parseInt(numsarray[i]); //convert all string values to int values inside int array
+    }
+    for(int i = 0; i < numbers.length; i++)
+    {
+    if (i == 0)
+    {             
+    h = numbers[0];                         //set first index to placeholder, go through array and determine largest/smallest ints
+    l= numbers[0];
+    }
+            if(numbers[i] > h)
+            {
+               h = numbers[i];   
+            }
+            else if(numbers[i] < l)
+            {
+              l = numbers[i];  
+            }
+        }
+high = Integer.toString(h);
+low = Integer.toString(l);
+JOptionPane.showMessageDialog(null, "Largest number: " +
+h + "\n" + "Smallest number: " + l);
+
+  
+
+}
+
+
+}
+public static void main (String args[])
+{
+NumberAnalyzer aly = new NumberAnalyzer();
+aly.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+aly.setSize(300,300);  
+aly.setLocation(350,300);
+aly.setVisible(true);
+
+}
+}
