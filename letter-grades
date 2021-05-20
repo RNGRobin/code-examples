@@ -1,0 +1,61 @@
+package lettergrade;
+import java.util.Scanner;
+
+
+public class LetterGrade {
+
+
+    public static void main(String[] args) 
+    {
+      int total = 0;
+      int grade;
+      int x = 1;
+      int y = 0;
+      while(x == 1)
+      {
+         Scanner input = new Scanner(System.in);
+         System.out.print( "Enter grade. Negative # to stop: " );
+         grade = input.nextInt();
+         if(grade>=90 & grade<=100)
+         {
+             System.out.println("Your letter grade: A");
+             total = total + grade;
+             y++;
+         }
+         else if(grade>=80 & grade<=89)
+         {
+             System.out.println("Your letter grade: B");
+             total = total + grade;
+             y++;
+         }
+         else if(grade>=70 & grade<=79)
+         {
+             System.out.println("Your letter grade: C");
+             total = total + grade;
+             y++;
+         }
+         else if(grade>=60 & grade<=69)
+         {
+             System.out.println("Your letter grade: D");
+             total = total + grade;
+             y++;
+         }
+         else if(grade>=0 & grade<=59)
+         {
+             System.out.println("Your letter grade: F");
+             total = total + grade;
+             y++;
+         }
+         else if(grade<0)
+         {
+             x=0;
+         }
+         else
+         {
+             System.out.println("Invalid input");
+         }
+      }
+    System.out.println("The grade average is: " + total/y);
+    }
+   
+}
