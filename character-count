@@ -1,0 +1,36 @@
+package charactercount;
+import java.util.Scanner;
+
+public class CharacterCount {
+
+   public static int count(char[] chars, char ch)
+   {
+       return count(chars, ch, chars.length - 1);
+   }  
+
+   public static int count(char[] chars, char ch, int h)
+   {  
+    if (h == -1)
+   {
+    return 0; //base case/terminating condition
+   }
+    if (chars[h] == ch)
+    {
+    return 1 + count(chars, ch, h - 1); 
+    }                                       //recursive calls
+    return count(chars, ch, h - 1);
+   }
+
+   public static void main(String[] args)
+   {
+       Scanner in = new Scanner(System.in);
+       System.out.println("Enter characters: "); //get user input for characters
+       String characters = in.nextLine(); //store in string variable
+       char[] chars = characters.toCharArray(); //convert str to char array
+       System.out.println("Enter the character to search for: "); //get user input for character for search
+       String letter = in.nextLine(); //store in letter variable
+       char ch = letter.charAt(0); //convert str to char
+       System.out.println("The amount of times " + ch + " is found: ");
+       System.out.println(count(chars,ch)); //call and print result from recursive method
+   }
+}
