@@ -1,0 +1,158 @@
+package drinkmachine;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JApplet;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public final class DrinkMachine extends JApplet {
+    //variables and components
+int colanum,lemonnum,grapenum,rootbeernum,waternum;
+double Cost = .75;
+double total;
+String amount;
+public JButton colaButton, lemonButton, grapeButton, rootbeerButton, waterButton, price;
+public JLabel moneyLabel, stockLabel;
+public JTextField moneyTF;
+public JPanel buttonPanel;
+
+    //drinkmachine method
+public DrinkMachine()
+{
+    //set drinks to 20
+ colanum = 20;
+ lemonnum = 20;
+ grapenum = 20;
+ rootbeernum = 20;
+ waternum = 20;
+ //setup buttons and button panel
+ colaButton = new JButton("Cola");
+     lemonButton = new JButton("Lemon");
+     grapeButton = new JButton("Grape");
+     rootbeerButton = new JButton("Root Beer");
+     waterButton = new JButton("Water");
+     moneyLabel = new JLabel("Enter amount: ");
+     stockLabel = new JLabel();
+     moneyTF = new JTextField(8);
+     buttonPanel = new JPanel();
+     buttonPanel.setLayout(new GridLayout(9,1));
+     buttonPanel.add(moneyLabel);
+     buttonPanel.add(moneyTF);
+     buttonPanel.add(stockLabel);
+     buttonPanel.add(colaButton);
+     buttonPanel.add(lemonButton);
+     buttonPanel.add(grapeButton);
+     buttonPanel.add(rootbeerButton);
+     buttonPanel.add(waterButton);
+     //buttonactionlistener class actionperformed method added to each button
+     colaButton.addActionListener(new ButtonActionListener());
+     lemonButton.addActionListener(new ButtonActionListener());
+     grapeButton.addActionListener(new ButtonActionListener());
+     rootbeerButton.addActionListener(new ButtonActionListener());
+     waterButton.addActionListener(new ButtonActionListener());
+     //add panel
+     add(buttonPanel);
+     }
+ //button action listener class
+ public class ButtonActionListener implements ActionListener{
+     @Override
+     public void actionPerformed(ActionEvent ae)
+     {
+         //convert value information of money entered to a double
+         String str = ae.getActionCommand();
+         total = Double.parseDouble(moneyTF.getText());
+         //check if money entered is the same value or is greater than beverage
+         if(total >= Cost)
+         {
+             //check which button is clicked
+             switch (str) {
+                 case "Cola":
+                     //check if selected choice is still in stock
+                     if(colanum > 0)
+                     {
+                        total = Double.parseDouble(moneyTF.getText());
+                         //subtract cost from total for new total
+                         total = total - Cost;
+                         //show change
+                         amount = Double.toString(total);
+                         //remove 1 from selected stock
+                         colanum--;
+                     }
+                     else{
+                         //output message out of stock
+                         stockLabel.setText("Out of stock");
+                     }   break;
+                 case "Lemon":
+                     if(lemonnum > 0)
+                     {
+                         total = Double.parseDouble(moneyTF.getText());
+                         total = total - Cost;
+                         amount = Double.toString(total);
+                         lemonnum--;
+                     }
+                     else{
+                         stockLabel.setText("Out of stock");
+                     }   break;
+                 case "Grape":
+                     if(grapenum > 0)
+                     {
+                         total = Double.parseDouble(moneyTF.getText());
+                         total = total - Cost;
+                         amount = Double.toString(total);
+                         grapenum--;
+                     }
+                     else{
+                         stockLabel.setText("Out of stock");
+                     }   break;
+                 case "Root Beer":
+                     if(rootbeernum > 0)
+                     {
+                         total = Double.parseDouble(moneyTF.getText());
+                         total = total - Cost;
+                         amount = Double.toString(total);
+                         rootbeernum--;
+                     }
+                     else{
+                         stockLabel.setText("Out of stock");
+                     }   break;
+                 case "Water":
+                     if(waternum > 0)
+                     {
+                         total = Double.parseDouble(moneyTF.getText());
+                         total = total - Cost;
+                         amount = Double.toString(total);
+                         waternum--;
+                     }
+                     else{
+                         stockLabel.setText("Out of stock");
+                     }   break;
+                 default:
+                     break;
+             }
+             moneyTF.setText(amount);
+         }
+         else{
+             //output message insufficent funds
+            moneyTF.setText("Insufficient funds");
+ }
+}
+ }
+  public static void main(String[] args){
+    JFrame frame = new JFrame("Drink Machine");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setSize(400,600);
+    DrinkMachine dm = new DrinkMachine();
+    frame.add(dm);
+    frame.setVisible(true);
+   
+}
+  
+}
